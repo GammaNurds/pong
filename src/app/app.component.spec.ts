@@ -1,13 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
+
 import { AppComponent } from './app.component';
+import { GameComponent } from './game/game.component';
 
 describe('App: Pong', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        GameComponent
       ],
     });
   });

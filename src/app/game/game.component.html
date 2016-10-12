@@ -1,0 +1,18 @@
+<div id="playerSelection" *ngIf="!gameTime">
+    <select [(ngModel)]="player1.name">
+        <option value="" disabled selected>Player 1</option>
+        <option value="player.name" *ngFor="let player of players | notName: player2.name">{{ player.name }}</option>
+    </select>
+
+    <select [(ngModel)]="player2.name">
+        <option value="" disabled selected>Player 2</option>
+        <option value="player.name" *ngFor="let player of players | notName: player1.name">{{ player.name }}</option>
+    </select>
+
+    <button [disabled]="!player1.name || !player2.name" (click)="startGame()">start game</button>
+</div>
+
+<div id="game" *ngIf="gameTime">
+    <button (click)="addPoint()">{{ player1.name }} score</button>
+    <button>{{ player2.name }} score</button>
+</div>

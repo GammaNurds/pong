@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { GameComponent } from './game/game.component';
+import { NotNamePipe } from './game/not-name.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GameComponent,
+    NotNamePipe
   ],
   imports: [
     BrowserModule,
