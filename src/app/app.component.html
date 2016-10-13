@@ -1,4 +1,17 @@
-<h1>
-  {{title}}
-</h1>
-<pong-game></pong-game>
+<div class="dark">
+  <h1>
+    {{ title }}
+  </h1>
+
+  <nav>
+    <a routerLink="/game" routerLinkActive="active">
+      <md-icon class="md-light">home</md-icon>
+    </a>
+    <a routerLink="/records" routerLinkActive="active">
+      <md-icon class="md-light">playlist_play</md-icon>
+    </a>
+  </nav>
+
+  <!-- this is replaced by component depending on route -->
+  <router-outlet></router-outlet>
+</div>

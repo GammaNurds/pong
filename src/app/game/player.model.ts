@@ -1,4 +1,4 @@
 export class Player {
-    id: number;
+    _id: string;
     name: string;
 }

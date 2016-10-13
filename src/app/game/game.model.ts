@@ -1,29 +1,73 @@
+import { Player } from './player.model';
+
 export class Game {
-    p1Name: string,
-    p2Name: string,
-    p1Points: number;
-    p2Points: number;
-    set: number; // current set number (1-3)
+    p1:Player;
+    p2:Player;
+    p1Points:number;
+    p2Points:number;
+    p1Sets:number;
+    p2Sets:number;
 
-    constructor(p1:any, p2:any) {
-        this.p1Name = p1.name;
-        this.p2Name = p2.name;
-        // run any stats here
+    MAXPOINTS:number = 7;
+    MAXSETS:number = 3;
+
+    constructor(p1:Player, p2:Player) {
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p1Points = 0;
+        this.p2Points = 0;
+        this.p1Sets = 0;
+        this.p2Sets = 0;
+        // return stats here
     }
 
-    addPoint(player:any) {
-        if (player.name === this.p1Name) {
-            this.p1Points = this.p1Points + 1;
-        } else if (player.name === this.p2Name) {
-            this.p2Points = this.p2Points + 1;
+    /**
+     * Adds a point to the specified players name.
+     */
+    addPoint(player:Player) {
+        if (player.name === this.p1.name) {
+            this.p1Points++;
+        } else if (player.name === this.p2.name) {
+            this.p2Points++;
         } else {
-            console.log(`unknown player "$(player.name)"`);
+            console.log(`unknown player: $(player.name)`);
         }
-        console.log(p1Points);
-        console.log(p2Points);
-    }
 
-    isOver() {
+        // start new set
+        if (this.p1Points >= this.MAXPOINTS) {
+            this.p1Sets++;
+            // reset points
+            this.p1Points = 0;
+            this.p2Points = 0;
+        } else if (this.p2Points >= this.MAXPOINTS) {
+            this.p2Sets++;
+            // reset points
+            this.p1Points = 0;
+            this.p2Points = 0;
+        }
+    };
 
-    }
+    getPointsByPlayer(player:Player):number {
+        if (player.name === this.p1.name) {
+            return this.p1Points;
+        } else if (player.name === this.p2.name) {
+            return this.p2Points;
+        }
+    };
+
+    getPlayerSets(player:Player):number {
+        if (player.name === this.p1.name) {
+            return this.p1Sets;
+        } else if (player.name === this.p2.name) {
+            return this.p2Sets;
+        }
+    };
+
+    isOver():boolean {
+        if (this.p1Sets >= this.MAXSETS || this.p2Sets >= this.MAXSETS) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 }
