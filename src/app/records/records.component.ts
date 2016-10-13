@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Record } from '../shared/record.model';
+import { RecordService } from '../shared/record.service';
+
 @Component({
-  selector: 'app-records',
+  selector: 'pong-records',
   templateUrl: './records.component.html',
-  styleUrls: ['./records.component.css']
+  styleUrls: ['./records.component.css'],
+  providers: [RecordService]
 })
 export class RecordsComponent implements OnInit {
 
-  constructor() { }
+    records:Record[];
 
-  ngOnInit() {
-  }
+    constructor(private recordService:RecordService) { }
+
+    ngOnInit() {
+        this.recordService.getRecords().then(records => {
+            this.records = records;
+        });
+    }
 
 }

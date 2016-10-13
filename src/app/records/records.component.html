@@ -1,3 +1,20 @@
-<p>
-  records works!
-</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Player 1</th>
+      <th>Player 2</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let record of records; let i = index">
+      <th scope="row">{{ i }}</th>
+      <td>{{ record.p1ID }}</td>
+      <td>{{ record.p2ID }}</td>
+      <td>{{ record.p1Sets }} - {{ record.p2Sets }}</td>
+    </tr>
+  </tbody>
+
+</table>

@@ -1,31 +1,31 @@
 
-<div id="playerSelection" class="container" *ngIf="!gameTime && !showScores">
-  <select [(ngModel)]="player1.name">
+
+  <!-- <select [(ngModel)]="player1.name">
     <option value="" disabled selected>Player 1</option>
-    <option value="{{player.name}}" *ngFor="let player of players">{{ player.name }}</option> <!-- | notName: player2.name -->
-  </select>
-
-  <select [(ngModel)]="player2.name" (ngModelChange)="changedPlayer($event)">
-    <option value="" disabled selected>Player 2</option>
     <option value="{{player.name}}" *ngFor="let player of players">{{ player.name }}</option>
-  </select>
+  </select> -->
 
-  <button class="btn btn-primary" [disabled]="!player1.name || !player2.name" (click)="startGame()">start game</button>
-</div>
 
-<div id="game" *ngIf="gameTime && !showScores">
-  <span>sets p1: {{ getPlayerSets(player1) }}</span>
-  <span>sets p2: {{ getPlayerSets(player2) }}</span>
-  <button md-raised-button color="primary" (click)="addPoint(player1)">{{ player1.name }} {{ getPointsByPlayer(player1) }}</button>
-  <button md-raised-button color="primary" (click)="addPoint(player2)">{{ player2.name }} {{ getPointsByPlayer(player2) }}</button>
-</div>
+<form>
+  <div class="form-group">
+    <label>Player 1</label>
+    <select class="form-control">
+      <option value="{{player.name}}" *ngFor="let player of players">{{ player.name }}</option>
+    </select>
 
-<div id="scores" *ngIf="showScores">
-  <h2>Game Over!</h2>
-  <span>Final score: {{ getPlayerSets(player1) }} - {{ getPlayerSets(player2) }} </span>
+  </div>
+  <div class="form-group">
+    <label>Sets won</label>
+    <input type="text" class="form-control" placeholder="Player 1">
+  </div>
+  <div class="form-group">
+    <label>Player 1</label>
+    <input type="text" class="form-control" placeholder="Player 1">
+  </div>
+  <div class="form-group">
+    <label>Sets won</label>
+    <input type="text" class="form-control" placeholder="Player 1">
+  </div>
 
-  <h3>Records</h3>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let record of records">{{ record.p1ID }} vs {{ record.p2ID }}</li>
-  </ul>
-</div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

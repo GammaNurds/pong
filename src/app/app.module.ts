@@ -26,7 +26,7 @@ import { RecordsComponent } from './records/records.component';
     FormsModule,
     RouterModule.forRoot([
       { path: 'game', component: GameComponent },
-      //{ path: 'heroes', component: HeroListComponent }
+      { path: 'records', component: RecordsComponent }
     ]),
     HttpModule,
     MaterialModule.forRoot()

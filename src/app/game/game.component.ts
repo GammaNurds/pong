@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { Player } from './player.model';
-import { Game } from './game.model';
-import { Record } from './record.model';
+import { Player } from '../shared/player.model';
+import { Game } from '../shared/game.model';
+import { Record } from '../shared/record.model';
 import { NotNamePipe } from './not-name.pipe';
 
-import { RecordService } from "./record.service";
+import { RecordService } from "../shared/record.service";
 import { PlayerService } from "./player.service";
 
 @Component({
@@ -23,8 +23,6 @@ export class GameComponent implements OnInit {
     gameTime:boolean;
     showScores:boolean;
     game:Game;
-
-    records:Record[];
 
     constructor(private recordService:RecordService, private playerService:PlayerService) {}
 
@@ -58,9 +56,6 @@ export class GameComponent implements OnInit {
             let record = new Record(this.game);
             this.recordService.saveRecord(record).then(record => {
                 console.log(record)
-                this.recordService.getRecords().then(records => {
-                    this.records = records;
-                });
             });
 
             // get scores

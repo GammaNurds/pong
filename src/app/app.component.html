@@ -1,17 +1,26 @@
-<div class="dark">
-  <h1>
-    {{ title }}
-  </h1>
 
-  <nav>
-    <a routerLink="/game" routerLinkActive="active">
-      <md-icon class="md-light">home</md-icon>
-    </a>
-    <a routerLink="/records" routerLinkActive="active">
-      <md-icon class="md-light">playlist_play</md-icon>
-    </a>
-  </nav>
+<div class="container">
 
-  <!-- this is replaced by component depending on route -->
-  <router-outlet></router-outlet>
+  <div class="row">
+    <!-- <div class="span12 bg dark center" *ngIf="loading">
+      <h2>loading Fuß Pong ...</h2>
+      <div class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
+          <span class="sr-only">{{ progress }}% Complete</span>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="col-md-4">
+      <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a routerLink="/game" routerLinkActive="active">Game</a></li>
+        <li role="presentation"><a routerLink="/records" routerLinkActive="active">Records</a></li>
+      </ul>
+
+      <!-- this is replaced by component depending on route -->
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
 </div>

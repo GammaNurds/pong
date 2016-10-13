@@ -1,5 +1,5 @@
-div.dark {
-  background-color: #333333;
+.dark {
+  background-color: red;
 }
 .material-icons.md-light {
   color: rgba(255, 255, 255, 1);
