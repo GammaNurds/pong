@@ -1,31 +1,30 @@
 
+<!-- player selection -->
+<div *ngIf="!game">
+    <div class="player" *ngFor="let player of players" (click)="selectPlayer(player)" [ngClass]="{'selected': (player1 && player.name === player1.name) || (player2 && player.name === player2.name), 'inactive': (player1 && player.name === player1.name) || (player2 && player.name === player2.name) || player1 && player2}">{{ player.name }}</div>
 
-  <!-- <select [(ngModel)]="player1.name">
-    <option value="" disabled selected>Player 1</option>
-    <option value="{{player.name}}" *ngFor="let player of players">{{ player.name }}</option>
-  </select> -->
+    <button (click)="startGame()" [disabled]="!player1 || !player2">Play</button>
+</div>
+
+<!-- score -->
+<div *ngIf="game">
+
+    <span>{{ player1.name }}</span>
+    <span>{{ getPlayerSets(player1) }}</span>
+
+    <span>{{ player2.name }}</span>
+    <span>{{ getPlayerSets(player2) }}</span>
+</div>
+
+<!-- select set winner -->
+<div *ngIf="game && !game.isOver()">
+    <h3>Satz {{ set }} hat gewonnen:</h3>
+    <div class="player" (click)="addSet(player1)">{{ player1.name }}</div>
+    <div class="player" (click)="addSet(player2)">{{ player2.name }}</div>
+</div>
 
 
-<form>
-  <div class="form-group">
-    <label>Player 1</label>
-    <select class="form-control">
-      <option value="{{player.name}}" *ngFor="let player of players">{{ player.name }}</option>
-    </select>
-
-  </div>
-  <div class="form-group">
-    <label>Sets won</label>
-    <input type="text" class="form-control" placeholder="Player 1">
-  </div>
-  <div class="form-group">
-    <label>Player 1</label>
-    <input type="text" class="form-control" placeholder="Player 1">
-  </div>
-  <div class="form-group">
-    <label>Sets won</label>
-    <input type="text" class="form-control" placeholder="Player 1">
-  </div>
-
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<div *ngIf="game && game.isOver()">
+    <div>WIN! / SWEEP!</div>
+    <button (click)="startGame()">rematch</button>
+</div>

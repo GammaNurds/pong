@@ -20,61 +20,51 @@ export class GameComponent implements OnInit {
     player1:Player;
     player2:Player;
 
-    gameTime:boolean;
-    showScores:boolean;
     game:Game;
+    set:number;
 
     constructor(private recordService:RecordService, private playerService:PlayerService) {}
 
     ngOnInit() {
-        this.gameTime = false;
-        this.showScores = false;
-        this.player1 = new Player();
-        this.player2 = new Player();
+        //this.gameTime = false;
+        //this.showScores = false;
 
         this.playerService.getPlayers().then(players => {
             this.players = players;
         });
+
+    }
+
+    selectPlayer(player) {
+        if (!this.player1) {
+            this.player1 = player;
+        } else {
+            if (!this.player2) {
+                this.player2 = player;
+            }
+        }
     }
 
     /**
      * Closes player selection and shows score buttons
      */
     startGame() {
-        this.gameTime = true;
         this.game = new Game(this.player1, this.player2);
+        this.set = 1;
     }
 
-    addPoint(player) {
-        this.game.addPoint(player);
-
-        // check if set or game is over
-        if (this.game.isOver()) {
-            this.showScores = true;
-
-            // save record and reload
-            let record = new Record(this.game);
-            this.recordService.saveRecord(record).then(record => {
-                console.log(record)
-            });
-
-            // get scores
-            // this.recordService.getRecords().then(function(records) {
-            //     this.records = records;
-            // });
-        }
-    }
-
-    getPointsByPlayer(player:Player) {
-        return this.game.getPointsByPlayer(player);
-    }
-
-    getPlayerSets(player:Player) {
+    getPlayerSets(player) {
         return this.game.getPlayerSets(player);
     }
 
-    changedPlayer(event) {
-        console.log(event);
+    addSet(player) {
+        this.game.addSet(player);
+        this.set++;
+
+        if (this.game.isOver()) {
+            this.recordService.saveRecord(new Record(this.game));
+        }
     }
+
 
 }

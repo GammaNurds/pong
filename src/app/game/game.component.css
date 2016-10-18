@@ -1,0 +1,12 @@
+
+.player {
+  cursor: pointer;
+  background: gray;
+  margin: 10px;
+}
+.selected {
+  color: red;
+}
+.inactive {
+  pointer-events: none;
+}

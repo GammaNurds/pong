@@ -13,22 +13,22 @@ export class AppComponent implements OnInit {
   progress:number;
 
   ngOnInit() {
-    this.loading = true;
-    this.progress = 0;
-
-    function startInterval() {
-        setInterval(function() {
-            if (this.progress < 100) {
-                this.progress++;
-                console.log(this.progress)
-            } else {
-                return false
-            }
-
-        }, 10000);
-    }
-
-    startInterval();
+    // this.loading = true;
+    // this.progress = 0;
+    //
+    // function startInterval() {
+    //     setInterval(function() {
+    //         if (this.progress < 100) {
+    //             this.progress++;
+    //             console.log(this.progress)
+    //         } else {
+    //             return false
+    //         }
+    //
+    //     }, 10000);
+    // }
+    //
+    // startInterval();
 
   }
 }

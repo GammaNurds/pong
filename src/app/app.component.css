@@ -1,9 +1,4 @@
-.dark {
-  background-color: red;
-}
-.material-icons.md-light {
-  color: rgba(255, 255, 255, 1);
-}
-.material-icons.md-light.md-inactive {
-  color: rgba(255, 255, 255, 0.3);
+#footer {
+  background: lightgreen;
+  height: 40px;
 }

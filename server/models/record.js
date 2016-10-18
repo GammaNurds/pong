@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var recordSchema = new Schema({
-    p1ID: Number,
-    p2ID: Number,
+    p1ID: String,
+    p2ID: String,
     p1Sets: Number,
     p2Sets: Number
 },{
