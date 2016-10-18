@@ -1,42 +1,43 @@
-
+<h2>Wins</h2>
 <table class="table">
-  <caption>Wins</caption>
   <tbody>
     <tr *ngFor="let stat of stats.wins; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
+      <td scope="row">{{ i + 1 }}</td>
       <td>{{ stat.playerName }}</td>
       <td>{{ stat.value }}</td>
     </tr>
   </tbody>
 </table>
 
+<h2>Win %</h2>
 <table class="table">
-  <caption>Win %</caption>
+  
   <tbody>
     <tr *ngFor="let stat of stats.winPerc; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
+      <td scope="row">{{ i + 1 }}</td>
       <td>{{ stat.playerName }}</td>
       <td>{{ stat.value }}</td>
     </tr>
   </tbody>
 </table>
 
+<h2>Sweeps</h2>
 <table class="table">
-  <caption>Sweeps</caption>
   <tbody>
     <tr *ngFor="let stat of stats.sweeps; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
+      <td scope="row">{{ i + 1 }}</td>
       <td>{{ stat.playerName }}</td>
       <td>{{ stat.value }}</td>
     </tr>
   </tbody>
 </table>
 
+
+<h2>Embarrassed</h2>
 <table class="table">
-  <caption>Embarrassed</caption>
-  <tbody>
+   <tbody>
     <tr *ngFor="let stat of stats.embarrassed; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
+      <td scope="row">{{ i + 1 }}</td>
       <td>{{ stat.playerName }}</td>
       <td>{{ stat.value }}</td>
     </tr>

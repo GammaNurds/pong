@@ -1,4 +1,23 @@
+* {margin: 0; padding: 0; font-size: 25px; font-family: "Caveat Brush";}
+a {color: white; text-decoration: none;}
+body {margin: 0;}
+
+
 #footer {
-  background: lightgreen;
-  height: 40px;
+ 
+  height: 80px;
+  position: fixed; 
+  bottom: 0;
+  background: #45D96A;
+  width: 100%;
+  color: white;
+  left: 0;
 }
+
+.left {float: left; margin-left: 10px;}
+.right {float: right; margin-right: 10px;}
+.logo {position: absolute; left: 50%; margin-left: -70px; bottom: 20px;}
+.icon {font-size: 50px; margin-top: 10px; display: block; color: yellow;}
+
+
+
