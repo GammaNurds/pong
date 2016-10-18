@@ -18,5 +18,4 @@ export class PlayerService {
                        return res.json() as Player[];
                    });
     }
-
 }

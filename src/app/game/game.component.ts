@@ -26,13 +26,9 @@ export class GameComponent implements OnInit {
     constructor(private recordService:RecordService, private playerService:PlayerService) {}
 
     ngOnInit() {
-        //this.gameTime = false;
-        //this.showScores = false;
-
         this.playerService.getPlayers().then(players => {
             this.players = players;
         });
-
     }
 
     selectPlayer(player) {

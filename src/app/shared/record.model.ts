@@ -2,8 +2,8 @@
 import { Game } from './game.model';
 
 export class Record {
-    p1ID:string;
-    p2ID:string;
+    p1Name:string;
+    p2Name:string;
     p1Sets:number;
     p2Sets:number;
 
@@ -11,8 +11,8 @@ export class Record {
      * Takes a game object and derives the record from it.
      */
     constructor(game: Game) {
-        this.p1ID = game.p1._id;
-        this.p2ID = game.p2._id;
+        this.p1Name = game.p1.name;
+        this.p2Name = game.p2.name;
         this.p1Sets = game.getPlayerSets(game.p1);
         this.p2Sets = game.getPlayerSets(game.p2);
     }

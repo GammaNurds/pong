@@ -45,6 +45,17 @@ router.get('/records', function (req, res) {
      });
  });
 
+ router.delete('/records/:id', function (req, res) {
+     var id = req.params.id;
+     Record.remove({_id: id}, function(err, record) {
+         if (err) {
+             throw err;
+         }
+         res.json(record);
+     });
+
+ });
+
  //
  // router.put('/users/:id', function (req, res) {
  //     var id = req.params.id;
@@ -85,8 +96,8 @@ router.get('/records', function (req, res) {
   });
 
   router.get('/players/:id', function (req, res) {
-      var id = req.params.id;
-      Player.findById(id, function(err, player) {
+      var name = req.params.id;
+      Player.findById(name, function(err, player) {
           if (err) {
               res.status(404).send('Not found');
           }
