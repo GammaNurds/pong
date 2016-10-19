@@ -16,7 +16,7 @@
     <tr *ngFor="let stat of stats.winPerc; let i = index">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
+      <td>{{ stat.value | number: ".1" }}</td>
     </tr>
   </tbody>
 </table>
