@@ -33,9 +33,42 @@
 </table>
 
 <table class="table">
-  <caption>Embarrassed</caption>
+  <caption>Sweeps against</caption>
   <tbody>
-    <tr *ngFor="let stat of stats.embarrassed; let i = index">
+    <tr *ngFor="let stat of stats.sweepsAgainst; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ stat.playerName }}</td>
+      <td>{{ stat.value }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <caption>Comebacks</caption>
+  <tbody>
+    <tr *ngFor="let stat of stats.comebacks; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ stat.playerName }}</td>
+      <td>{{ stat.value }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <caption>Comebacks against</caption>
+  <tbody>
+    <tr *ngFor="let stat of stats.comebacks; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ stat.playerName }}</td>
+      <td>{{ stat.value }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <caption>Hottest -win streak</caption>
+  <tbody>
+    <tr *ngFor="let stat of stats.winStreak; let i = index">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ stat.playerName }}</td>
       <td>{{ stat.value }}</td>

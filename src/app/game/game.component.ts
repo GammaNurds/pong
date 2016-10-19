@@ -22,6 +22,7 @@ export class GameComponent implements OnInit {
 
     game:Game;
     set:number;
+    winText:string;
 
     constructor(private recordService:RecordService, private playerService:PlayerService) {}
 
@@ -59,6 +60,8 @@ export class GameComponent implements OnInit {
 
         if (this.game.isOver()) {
             this.recordService.saveRecord(new Record(this.game));
+
+            this.winText = this.game.isSweep() ? "sweeeeep" : "win";
         }
     }
 
