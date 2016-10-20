@@ -47365,7 +47365,7 @@ var PlayerService = (function () {
         this.HOST = "http://localhost:3002";
     }
     PlayerService.prototype.getPlayers = function () {
-        return this.http.get("http://localhost:3002/api/players")
+        return this.http.get("/api/players")
             .toPromise()
             .then(function (res) {
             return res.json();
@@ -47408,7 +47408,7 @@ var RecordService = (function () {
         this.HOST = "http://localhost:3002";
     }
     RecordService.prototype.getRecords = function () {
-        return this.http.get("http://localhost:3002/api/records")
+        return this.http.get("/api/records")
             .toPromise()
             .then(function (res) {
             return res.json();
@@ -47418,7 +47418,7 @@ var RecordService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
         var body = JSON.stringify(record);
-        return this.http.post("http://localhost:3002/api/records/", body, options)
+        return this.http.post("/api/records/", body, options)
             .toPromise()
             .then(function (res) {
             return res.json();
