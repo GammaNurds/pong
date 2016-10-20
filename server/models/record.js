@@ -7,7 +7,8 @@ var recordSchema = new Schema({
     p1Name: String,
     p2Name: String,
     p1Sets: Number,
-    p2Sets: Number
+    p2Sets: Number,
+    setWinners: {}
 },{
     timestamps: true  // creates updatedAt and createdAt
 });

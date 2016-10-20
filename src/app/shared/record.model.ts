@@ -6,6 +6,7 @@ export class Record {
     p2Name:string;
     p1Sets:number;
     p2Sets:number;
+    setWinners:any;
 
     /**
      * Takes a game object and derives the record from it.
@@ -15,5 +16,6 @@ export class Record {
         this.p2Name = game.p2.name;
         this.p1Sets = game.getPlayerSets(game.p1);
         this.p2Sets = game.getPlayerSets(game.p2);
+        this.setWinners = game.setWinners;
     }
 }

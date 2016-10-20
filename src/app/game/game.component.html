@@ -25,6 +25,6 @@
 
 
 <div *ngIf="game && game.isOver()">
-    <div>WIN! / SWEEP!</div>
-    <div class="fullsizebutton" (click)="startGame()">rematch</div>
+    <div>{{ winText }}</div>
+    <button class="fullsizebutton" (click)="startGame()">rematch</button>
 </div>
