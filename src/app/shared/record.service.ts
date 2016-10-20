@@ -15,7 +15,7 @@ export class RecordService {
     constructor(private http: Http) { }
 
     getRecords(): Promise<Record[]> {
-        return this.http.get("http://localhost:3002/api/records")
+        return this.http.get("/api/records")
                    .toPromise()
                    .then(function(res) {
                        return res.json() as Record[];
@@ -26,7 +26,7 @@ export class RecordService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify(record);
-        return this.http.post("http://localhost:3002/api/records/",body , options)
+        return this.http.post("/api/records/", body , options)
                     .toPromise()
                     .then(function(res) {
                         return res.json() as Record;
