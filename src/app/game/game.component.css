@@ -3,7 +3,8 @@
 * {margin: 0; padding: 0; font-size: 30px; font-family: "Caveat Brush";  }
 
 .fullsizebutton { 		width: calc( 100% - 20px); margin-left: 10px; text-align: center; border-radius: 4px; 
-						background: #B5FFC8; margin-bottom: 10px; height: 80px; line-height: 80px;  }
+						background: #B5FFC8; margin-bottom: 10px; height: 65px; line-height: 65px;  }
 .selected {background: #45D96A; color: yellow; }
 .inactive {pointer-events: none;}
-.playbutton {height: 120px; font-style: italic; line-height: 120px;}
+.playbutton {height: 100px; font-style: italic; line-height: 100px;}
+.playerselection { width: 100%; float: left; margin-bottom: 100px; }
