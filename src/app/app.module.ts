@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
 import { NotNamePipe } from './game/not-name.pipe';
 import { RecordsComponent } from './records/records.component';
+import { OrderByPipe } from './shared/order-by.pipe';
 
 // import { RecordService } from "./record.service";  // application wide services
 
@@ -17,13 +18,15 @@ import { RecordsComponent } from './records/records.component';
     AppComponent,
     GameComponent,
     NotNamePipe,
-    RecordsComponent
+    RecordsComponent,
+    OrderByPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/play', pathMatch: 'full' },
+      { path: '', redirectTo: 'play', pathMatch: 'full' },
       { path: 'play', component: GameComponent },
       { path: 'records', component: RecordsComponent }
     ]),

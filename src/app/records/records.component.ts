@@ -5,12 +5,14 @@ import { RecordService } from '../shared/record.service';
 import { Player } from '../shared/player.model';
 import { PlayerService } from '../game/player.service';
 import * as _ from 'lodash';
+import { OrderByPipe } from '../shared/order-by.pipe';
 
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
   styleUrls: ['./records.component.css'],
   providers: [RecordService, PlayerService]
+  //pipes: [OrderByPipe]
 })
 export class RecordsComponent implements OnInit {
 
@@ -34,6 +36,10 @@ export class RecordsComponent implements OnInit {
 
     isWinner(playerName: string, record: Record): boolean {
         return (record.p1Name === playerName && record.p1Sets > record.p2Sets) || (record.p2Name === playerName && record.p1Sets < record.p2Sets);
+    }
+
+    hasPlayed(playerName: string, record: Record): boolean {
+        return record.p1Name === playerName || record.p2Name === playerName;
     }
 
     calcStats(records: Record[], players: Player[]): void {
@@ -68,7 +74,7 @@ export class RecordsComponent implements OnInit {
                 // won match
                 if (this.isWinner(player.name, o)) {
                     // lost first two sets
-                    if (o.setWinners['1'] !== player && o.setWinners['1'] !== player) {
+                    if (o.setWinners[1] !== player.name && o.setWinners[2] !== player.name) {
                         isComeback = true;
                     }
                 }
@@ -81,7 +87,7 @@ export class RecordsComponent implements OnInit {
                 // lost match
                 if (!this.isWinner(player.name, o)) {
                     // won first two sets
-                    if (o.setWinners['1'] === player && o.setWinners['1'] === player) {
+                    if (o.setWinners[1] === player.name && o.setWinners[2] === player.name) {
                         isComebackAgainst = true;
                     }
                 }
@@ -105,7 +111,7 @@ export class RecordsComponent implements OnInit {
             });
             this.stats.winPerc.push({
                 playerName: player.name,
-                value: wins.length / records.length
+                value: wins.length / playedGames.length
             });
             this.stats.sweeps.push({
                 playerName: player.name,

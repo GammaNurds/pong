@@ -7,12 +7,12 @@ import { Player } from '../shared/player.model';
 @Injectable()
 export class PlayerService {
 
-    private HOST = "http://localhost:3002";
+    HOST = ""; //"http://localhost:3002";
 
     constructor(private http: Http) { }
 
     getPlayers(): Promise<Player[]> {
-        return this.http.get("/api/players")
+        return this.http.get(this.HOST + "/api/players")
                    .toPromise()
                    .then(function(res) {
                        return res.json() as Player[];
