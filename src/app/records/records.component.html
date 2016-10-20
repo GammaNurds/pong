@@ -1,77 +1,79 @@
-<h2>Wins</h2>
-<table class="table">
-  <tbody>
-    <tr *ngFor="let stat of stats.wins; let i = index">
-      <td scope="row">{{ i + 1 }}</td>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="tables">
+  <h2>Wins</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let stat of stats.wins; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h2>Win %</h2>
-<table class="table">
-   <tbody>
-    <tr *ngFor="let stat of stats.winPerc; let i = index">
-      <td scope="row">{{ i + 1 }}</td>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value | number: ".1" }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Win %</h2>
+  <table class="table">
+     <tbody>
+      <tr *ngFor="let stat of stats.winPerc; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value | number: ".1" }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h2>Sweeps</h2>
-<table class="table">
-  <tbody>
-    <tr *ngFor="let stat of stats.sweeps; let i = index">
-      <td scope="row">{{ i + 1 }}</td>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Sweeps</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let stat of stats.sweeps; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
 
 
-<h2>Sweeps against</h2>
-<table class="table">
-  <tbody>
-    <tr *ngFor="let stat of stats.sweepsAgainst; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Sweeps against</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let stat of stats.sweepsAgainst; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h2>Comebacks</h2>
-<table class="table">
-   <tbody>
-    <tr *ngFor="let stat of stats.comebacks; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Comebacks</h2>
+  <table class="table">
+     <tbody>
+      <tr *ngFor="let stat of stats.comebacks; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h2>Comebacks against</h2>
-<table class="table">
-   <tbody>
-    <tr *ngFor="let stat of stats.comebacks; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Comebacks against</h2>
+  <table class="table">
+     <tbody>
+      <tr *ngFor="let stat of stats.comebacks; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h2>Hottest -win streak</h2>
-<table class="table">
-  <tbody>
-    <tr *ngFor="let stat of stats.winStreak; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ stat.playerName }}</td>
-      <td>{{ stat.value }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Hottest -win streak</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let stat of stats.winStreak; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -4,3 +4,4 @@
 h2 {margin-top: 20px; background: black; color: white; float: left; clear: left; width: auto; font-weight: normal; padding: 0 3px;}
 table {float: left; clear: left;}
 td {	min-width: 20px; padding-left: 20px;}
+.tables {margin-bottom: 100px; display: block; float: left;}
