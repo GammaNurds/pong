@@ -10,9 +10,7 @@ import { GameComponent } from './game/game.component';
 import { NotNamePipe } from './game/not-name.pipe';
 import { RecordsComponent } from './records/records.component';
 
-
-
-//import { RecordService } from "./record.service";  // application wide services
+// import { RecordService } from "./record.service";  // application wide services
 
 @NgModule({
   declarations: [
@@ -25,6 +23,7 @@ import { RecordsComponent } from './records/records.component';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
+      { path: '', redirectTo: '/play', pathMatch: 'full' },
       { path: 'play', component: GameComponent },
       { path: 'records', component: RecordsComponent }
     ]),

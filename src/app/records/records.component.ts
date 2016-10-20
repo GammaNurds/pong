@@ -4,21 +4,21 @@ import { Record } from '../shared/record.model';
 import { RecordService } from '../shared/record.service';
 import { Player } from '../shared/player.model';
 import { PlayerService } from '../game/player.service';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 @Component({
-  selector: 'pong-records',
+  selector: 'app-records',
   templateUrl: './records.component.html',
   styleUrls: ['./records.component.css'],
   providers: [RecordService, PlayerService]
 })
 export class RecordsComponent implements OnInit {
 
-    records:Record[];
-    players:Player[];
+    records: Record[];
+    players: Player[];
     stats;
 
-    constructor(private recordService:RecordService, private playerService:PlayerService) { }
+    constructor(private recordService: RecordService, private playerService: PlayerService) { }
 
     ngOnInit() {
         this.stats = {};
@@ -32,11 +32,11 @@ export class RecordsComponent implements OnInit {
         });
     }
 
-    isWinner(playerName:string, record:Record):boolean {
-        return (record.p1Name === playerName && record.p1Sets > record.p2Sets) || (record.p2Name === playerName && record.p1Sets < record.p2Sets)
+    isWinner(playerName: string, record: Record): boolean {
+        return (record.p1Name === playerName && record.p1Sets > record.p2Sets) || (record.p2Name === playerName && record.p1Sets < record.p2Sets);
     }
 
-    calcStats(records:Record[], players:Player[]):void {
+    calcStats(records: Record[], players: Player[]): void {
 
         this.stats = {
             wins: [],
@@ -68,7 +68,7 @@ export class RecordsComponent implements OnInit {
                 // won match
                 if (this.isWinner(player.name, o)) {
                     // lost first two sets
-                    if (o.setWinners["1"] !== player && o.setWinners["1"] !== player) {
+                    if (o.setWinners['1'] !== player && o.setWinners['1'] !== player) {
                         isComeback = true;
                     }
                 }
@@ -81,7 +81,7 @@ export class RecordsComponent implements OnInit {
                 // lost match
                 if (!this.isWinner(player.name, o)) {
                     // won first two sets
-                    if (o.setWinners["1"] === player && o.setWinners["1"] === player) {
+                    if (o.setWinners['1'] === player && o.setWinners['1'] === player) {
                         isComebackAgainst = true;
                     }
                 }

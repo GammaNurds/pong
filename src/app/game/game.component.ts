@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import { Player } from '../shared/player.model';
 import { Game } from '../shared/game.model';
 import { Record } from '../shared/record.model';
-import { NotNamePipe } from './not-name.pipe';
+// import { NotNamePipe } from './not-name.pipe';
 
-import { RecordService } from "../shared/record.service";
-import { PlayerService } from "./player.service";
+import { RecordService } from '../shared/record.service';
+import { PlayerService } from './player.service';
 
 @Component({
-  selector: 'pong-game',
+  selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
   providers: [RecordService, PlayerService]
 })
 export class GameComponent implements OnInit {
 
-    players:Player[];  // this.players should only be an array of player objects
-    player1:Player;
-    player2:Player;
+    players: Player[];  // this.players should only be an array of player objects
+    player1: Player;
+    player2: Player;
+    game: Game;
+    set: number;
+    winText: string;
 
-    game:Game;
-    set:number;
-    winText:string;
-
-    constructor(private recordService:RecordService, private playerService:PlayerService) {}
+    constructor(private recordService: RecordService, private playerService: PlayerService) {}
 
     ngOnInit() {
+        console.log("init game component!");
         this.playerService.getPlayers().then(players => {
             this.players = players;
         });
@@ -61,7 +61,7 @@ export class GameComponent implements OnInit {
         if (this.game.isOver()) {
             this.recordService.saveRecord(new Record(this.game));
 
-            this.winText = this.game.isSweep() ? "sweeeeep" : "win";
+            this.winText = this.game.isSweep() ? 'sweeeeep' : 'win';
         }
     }
 
