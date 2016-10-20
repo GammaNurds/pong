@@ -1,12 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush');
 
-.player {
-  cursor: pointer;
-  background: gray;
-  margin: 10px;
-}
-.selected {
-  color: red;
-}
-.inactive {
-  pointer-events: none;
-}
+* {margin: 0; padding: 0; font-size: 30px; font-family: "Caveat Brush";  }
+
+.fullsizebutton { 		width: calc( 100% - 20px); margin-left: 10px; text-align: center; border-radius: 4px; 
+						background: #B5FFC8; margin-bottom: 10px; height: 80px; line-height: 80px;  }
+.selected {background: #45D96A; color: yellow; }
+.inactive {pointer-events: none;}
+.playbutton {height: 120px; font-style: italic; line-height: 120px;}
