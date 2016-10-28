@@ -31,6 +31,7 @@ export class RecordsComponent implements OnInit {
             this.playerService.getPlayers()
         ]).then(results => {
             this.calcStats(results[0], results[1]);
+            this.calcELO(results[0], results[1]);
         });
     }
 
@@ -136,4 +137,32 @@ export class RecordsComponent implements OnInit {
         }
     }
 
+    calcELO(records: Record[], players: Player[]) {
+        let eloStats = {};
+        const STARTPOINTS = 1000;
+
+        for (let player of players) {
+            eloStats[player.name] = STARTPOINTS;
+        }
+
+        function ELOCalcWinner(winner, loser) {
+            const K = 10;
+            let winner_calc = winner;
+            let loser_calc = loser;
+            if (Math.abs(loser - winner) > 400) {
+                winner_calc = 400;
+                loser_calc = -400;
+            }
+
+            let EWP_winner = 1 / (1 + (Math.pow(10, ((loser_calc - winner_calc) / 400))));
+            let EWP_loser = 1 - EWP_winner;
+
+            winner = Math.ceil(winner + K * (1 - EWP_winner));
+            loser = Math.ceil(loser + K * (0 - EWP_loser));
+            console.log("after winner", winner);
+            console.log("after loser", loser);
+        };
+
+        ELOCalcWinner(eloStats["martin"], eloStats["florian"]);
+    }
 }

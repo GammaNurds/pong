@@ -10,6 +10,7 @@ import { GameComponent } from './game/game.component';
 import { NotNamePipe } from './game/not-name.pipe';
 import { RecordsComponent } from './records/records.component';
 import { OrderByPipe } from './shared/order-by.pipe';
+import 'rxjs/add/operator/toPromise';
 
 // import { RecordService } from "./record.service";  // application wide services
 
@@ -19,7 +20,6 @@ import { OrderByPipe } from './shared/order-by.pipe';
     GameComponent,
     NotNamePipe,
     RecordsComponent,
-    OrderByPipe,
     OrderByPipe
   ],
   imports: [
@@ -30,8 +30,7 @@ import { OrderByPipe } from './shared/order-by.pipe';
       { path: 'play', component: GameComponent },
       { path: 'records', component: RecordsComponent }
     ]),
-    HttpModule,
-    MaterialModule.forRoot()
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
