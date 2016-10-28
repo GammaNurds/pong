@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { RecordService } from '../shared/record.service';
 import { PlayerService } from '../game/player.service';
+import { EloService } from '../elo.service';
 import * as _ from 'lodash';
 var RecordsComponent = (function () {
-    function RecordsComponent(recordService, playerService) {
+    function RecordsComponent(recordService, playerService, eloService) {
         this.recordService = recordService;
         this.playerService = playerService;
+        this.eloService = eloService;
     }
     RecordsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -24,7 +26,6 @@ var RecordsComponent = (function () {
             this.playerService.getPlayers()
         ]).then(function (results) {
             _this.calcStats(results[0], results[1]);
-            _this.calcELO(results[0], results[1]);
         });
     };
     RecordsComponent.prototype.isWinner = function (playerName, record) {
@@ -36,6 +37,7 @@ var RecordsComponent = (function () {
     RecordsComponent.prototype.calcStats = function (records, players) {
         var _this = this;
         this.stats = {
+            ranks: [],
             wins: [],
             winPerc: [],
             sweeps: [],
@@ -44,6 +46,7 @@ var RecordsComponent = (function () {
             comebacksAgainst: [],
             winStreak: []
         };
+        this.stats.ranks = this.eloService.calcELO(records, players);
         var _loop_1 = function (player) {
             var wins = _.filter(records, function (o) {
                 return _this.isWinner(player.name, o);
@@ -118,31 +121,6 @@ var RecordsComponent = (function () {
             _loop_1(player);
         }
     };
-    RecordsComponent.prototype.calcELO = function (records, players) {
-        var eloStats = {};
-        var STARTPOINTS = 1000;
-        for (var _i = 0, players_2 = players; _i < players_2.length; _i++) {
-            var player = players_2[_i];
-            eloStats[player.name] = STARTPOINTS;
-        }
-        function ELOCalcWinner(winner, loser) {
-            var K = 10;
-            var winner_calc = winner;
-            var loser_calc = loser;
-            if (Math.abs(loser - winner) > 400) {
-                winner_calc = 400;
-                loser_calc = -400;
-            }
-            var EWP_winner = 1 / (1 + (Math.pow(10, ((loser_calc - winner_calc) / 400))));
-            var EWP_loser = 1 - EWP_winner;
-            winner = Math.ceil(winner + K * (1 - EWP_winner));
-            loser = Math.ceil(loser + K * (0 - EWP_loser));
-            console.log("after winner", winner);
-            console.log("after loser", loser);
-        }
-        ;
-        ELOCalcWinner(eloStats["martin"], eloStats["florian"]);
-    };
     return RecordsComponent;
 }());
 RecordsComponent = __decorate([
@@ -150,9 +128,9 @@ RecordsComponent = __decorate([
         selector: 'app-records',
         templateUrl: './records.component.html',
         styleUrls: ['./records.component.css'],
-        providers: [RecordService, PlayerService]
+        providers: [RecordService, PlayerService, EloService]
     }),
-    __metadata("design:paramtypes", [RecordService, PlayerService])
+    __metadata("design:paramtypes", [RecordService, PlayerService, EloService])
 ], RecordsComponent);
 export { RecordsComponent };
 //# sourceMappingURL=../../../../src/app/records/records.component.js.map

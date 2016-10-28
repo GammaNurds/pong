@@ -17,7 +17,6 @@ import { GameComponent } from './game/game.component';
 import { NotNamePipe } from './game/not-name.pipe';
 import { RecordsComponent } from './records/records.component';
 import { OrderByPipe } from './shared/order-by.pipe';
-import 'rxjs/add/operator/toPromise';
 var AppModule = (function () {
     function AppModule() {
     }

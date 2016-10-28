@@ -4,6 +4,7 @@ import { Record } from '../shared/record.model';
 import { RecordService } from '../shared/record.service';
 import { Player } from '../shared/player.model';
 import { PlayerService } from '../game/player.service';
+import { EloService } from '../elo.service';
 import * as _ from 'lodash';
 import { OrderByPipe } from '../shared/order-by.pipe';
 
@@ -11,7 +12,7 @@ import { OrderByPipe } from '../shared/order-by.pipe';
   selector: 'app-records',
   templateUrl: './records.component.html',
   styleUrls: ['./records.component.css'],
-  providers: [RecordService, PlayerService]
+  providers: [RecordService, PlayerService, EloService]
   //pipes: [OrderByPipe]
 })
 export class RecordsComponent implements OnInit {
@@ -20,7 +21,7 @@ export class RecordsComponent implements OnInit {
     players: Player[];
     stats;
 
-    constructor(private recordService: RecordService, private playerService: PlayerService) { }
+    constructor(private recordService: RecordService, private playerService: PlayerService, private eloService: EloService) { }
 
     ngOnInit() {
         this.stats = {};
@@ -31,7 +32,6 @@ export class RecordsComponent implements OnInit {
             this.playerService.getPlayers()
         ]).then(results => {
             this.calcStats(results[0], results[1]);
-            this.calcELO(results[0], results[1]);
         });
     }
 
@@ -46,6 +46,7 @@ export class RecordsComponent implements OnInit {
     calcStats(records: Record[], players: Player[]): void {
 
         this.stats = {
+            ranks: [],
             wins: [],
             winPerc: [],
             sweeps: [],
@@ -54,6 +55,8 @@ export class RecordsComponent implements OnInit {
             comebacksAgainst: [],
             winStreak: []
         };
+
+        this.stats.ranks = this.eloService.calcELO(records, players);
 
         for (let player of players) {
 
@@ -135,34 +138,5 @@ export class RecordsComponent implements OnInit {
                 value: winStreak
             });
         }
-    }
-
-    calcELO(records: Record[], players: Player[]) {
-        let eloStats = {};
-        const STARTPOINTS = 1000;
-
-        for (let player of players) {
-            eloStats[player.name] = STARTPOINTS;
-        }
-
-        function ELOCalcWinner(winner, loser) {
-            const K = 10;
-            let winner_calc = winner;
-            let loser_calc = loser;
-            if (Math.abs(loser - winner) > 400) {
-                winner_calc = 400;
-                loser_calc = -400;
-            }
-
-            let EWP_winner = 1 / (1 + (Math.pow(10, ((loser_calc - winner_calc) / 400))));
-            let EWP_loser = 1 - EWP_winner;
-
-            winner = Math.ceil(winner + K * (1 - EWP_winner));
-            loser = Math.ceil(loser + K * (0 - EWP_loser));
-            console.log("after winner", winner);
-            console.log("after loser", loser);
-        };
-
-        ELOCalcWinner(eloStats["martin"], eloStats["florian"]);
     }
 }

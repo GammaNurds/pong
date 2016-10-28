@@ -1,4 +1,16 @@
 <div class="tables">
+
+  <h2>ELO Rank</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let rank of stats.ranks | orderBy: ['elo']; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ rank.playerName }}</td>
+        <td>{{ rank.elo }}</td>
+      </tr>
+    </tbody>
+  </table>
+
   <h2>Wins</h2>
   <table class="table">
     <tbody>
@@ -58,7 +70,7 @@
   <h2>Comebacks against</h2>
   <table class="table">
      <tbody>
-      <tr *ngFor="let stat of stats.comebacks | orderBy: ['value']; let i = index">
+      <tr *ngFor="let stat of stats.comebacksAgainst | orderBy: ['value']; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ stat.playerName }}</td>
         <td>{{ stat.value }}</td>

@@ -2,29 +2,22 @@
 <!-- player selection -->
 <div class="playerselection">
     <div *ngIf="!game">
-        <div class="player fullsizebutton" *ngFor="let player of players" (click)="selectPlayer(player)" [ngClass]="{'selected': (player1 && player.name === player1.name) || (player2 && player.name === player2.name), 'inactive': (player1 && player.name === player1.name) || (player2 && player.name === player2.name) || player1 && player2}">{{ player.name }}</div>
+        <div class="player fullsizebutton" *ngFor="let player of players" (click)="selectPlayer(player)" [ngClass]="{'selected': isSelected(player)}">
+            {{ player.name }}
+            <span *ngIf="player1 && player2">
+
+                <!-- expected if p1 wins -->
+                <span *ngIf="player1.name === player.name">{{ "+" + p1WinExpected }}</span>
+
+                <!-- expected if p2 wins -->
+                <span *ngIf="player2.name === player.name">{{ "+" + p2WinExpected }}</span>
+
+            </span>
+        </div>
 
         <div class="playbutton fullsizebutton" (click)="startGame()" [ngClass]="{'inactive': !player1 || !player2, 'selected': player1 && player2}">Play</div>
     </div>
 </div>
-
-<!-- score -->
-<div *ngIf="game">
-
-    <span>{{ player1.name }}</span>
-    <span>{{ getPlayerSets(player1) }}</span>
-
-    <span>{{ player2.name }}</span>
-    <span>{{ getPlayerSets(player2) }}</span>
-</div>
-
-<!-- select set winner -->
-<div *ngIf="game && !game.isOver()">
-    <h3>Satz {{ set }} hat gewonnen:</h3>
-    <div class="player fullsizebutton" (click)="addSet(player1)">{{ player1.name }}</div>
-    <div class="player fullsizebutton" (click)="addSet(player2)">{{ player2.name }}</div>
-</div>
-
 
 <div *ngIf="game && game.isOver()">
     <div>{{ winText }}</div>
