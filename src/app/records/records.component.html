@@ -49,7 +49,7 @@
   <table class="table">
     <tbody>
       <tr *ngFor="let stat of stats.sweepsAgainst | orderBy: ['value']; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
+        <td scope="row">{{ i + 1 }}</td>
         <td>{{ stat.playerName }}</td>
         <td>{{ stat.value }}</td>
       </tr>
@@ -60,7 +60,7 @@
   <table class="table">
      <tbody>
       <tr *ngFor="let stat of stats.comebacks | orderBy: ['value']; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
+        <td scope="row">{{ i + 1 }}</td>
         <td>{{ stat.playerName }}</td>
         <td>{{ stat.value }}</td>
       </tr>
@@ -71,7 +71,7 @@
   <table class="table">
      <tbody>
       <tr *ngFor="let stat of stats.comebacksAgainst | orderBy: ['value']; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
+        <td scope="row">{{ i + 1 }}</td>
         <td>{{ stat.playerName }}</td>
         <td>{{ stat.value }}</td>
       </tr>
@@ -82,10 +82,22 @@
   <table class="table">
     <tbody>
       <tr *ngFor="let stat of stats.winStreak | orderBy: ['value']; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
+        <td scope="row">{{ i + 1 }}</td>
         <td>{{ stat.playerName }}</td>
         <td>{{ stat.value }}</td>
       </tr>
     </tbody>
   </table>
+
+  <h2>Clutch sets</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let stat of stats.clutchSets | orderBy: ['value']; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

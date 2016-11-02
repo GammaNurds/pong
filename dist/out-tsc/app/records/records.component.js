@@ -44,7 +44,8 @@ var RecordsComponent = (function () {
             sweepsAgainst: [],
             comebacks: [],
             comebacksAgainst: [],
-            winStreak: []
+            winStreak: [],
+            clutchSets: []
         };
         this.stats.ranks = this.eloService.calcELO(records, players);
         var _loop_1 = function (player) {
@@ -86,6 +87,23 @@ var RecordsComponent = (function () {
                     break;
                 }
             }
+            ;
+            var clutchSets = _.filter(records, function (o) {
+                if (o.p1Sets >= 2 && o.p2Sets >= 2) {
+                    if (o.p1Sets > o.p2Sets && o.p1Name === player.name) {
+                        return true;
+                    }
+                    else if (o.p1Sets < o.p2Sets && o.p2Name === player.name) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return false;
+                }
+            });
             this_1.stats.wins.push({
                 playerName: player.name,
                 value: wins.length
@@ -113,6 +131,10 @@ var RecordsComponent = (function () {
             this_1.stats.winStreak.push({
                 playerName: player.name,
                 value: winStreak
+            });
+            this_1.stats.clutchSets.push({
+                playerName: player.name,
+                value: clutchSets.length
             });
         };
         var this_1 = this;

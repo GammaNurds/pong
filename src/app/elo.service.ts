@@ -9,7 +9,7 @@ export class EloService {
   constructor() { }
 
   calc(winner, loser): any[] {
-      const K = 10;
+      const K = 20;
       let winner_calc = winner;
       let loser_calc = loser;
       if (Math.abs(loser - winner) > 400) {
@@ -47,10 +47,10 @@ export class EloService {
               // apply new elo to players
               ranks.forEach(function(rank) {
                   if (rank.playerName === record.p1Name) {
-                      console.log(rank.elo);
+                      //console.log(rank.elo);
                       rank.elo = newELO[0];
                   } else if (rank.playerName === record.p2Name) {
-                      console.log(rank.elo);
+                      //console.log(rank.elo);
                       rank.elo = newELO[1];
                   }
               });

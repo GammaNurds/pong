@@ -7,10 +7,10 @@
             <span *ngIf="player1 && player2">
 
                 <!-- expected if p1 wins -->
-                <span *ngIf="player1.name === player.name">{{ "+" + p1WinExpected }}</span>
+                <span *ngIf="player1.name === player.name">{{ "+" + p1WinExpected + "/-" + p2WinExpected }}</span>
 
                 <!-- expected if p2 wins -->
-                <span *ngIf="player2.name === player.name">{{ "+" + p2WinExpected }}</span>
+                <span *ngIf="player2.name === player.name">{{ "+" + p2WinExpected + "/-" + p1WinExpected }}</span>
 
             </span>
         </div>

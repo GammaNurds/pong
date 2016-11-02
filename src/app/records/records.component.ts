@@ -53,7 +53,8 @@ export class RecordsComponent implements OnInit {
             sweepsAgainst: [],
             comebacks: [],
             comebacksAgainst: [],
-            winStreak: []
+            winStreak: [],
+            clutchSets: []
         };
 
         this.stats.ranks = this.eloService.calcELO(records, players);
@@ -107,7 +108,22 @@ export class RecordsComponent implements OnInit {
                 } else {  // lost game
                     break;
                 }
-            }
+            };
+
+            // clutch sets are a won set on a stand of 2-2
+            let clutchSets = _.filter(records, o => {
+                if (o.p1Sets >= 2 && o.p2Sets >= 2) {  // has clutch set
+                    if (o.p1Sets > o.p2Sets && o.p1Name === player.name) {
+                        return true;
+                    } else if (o.p1Sets < o.p2Sets && o.p2Name === player.name) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            });
 
             this.stats.wins.push({
                 playerName: player.name,
@@ -136,6 +152,10 @@ export class RecordsComponent implements OnInit {
             this.stats.winStreak.push({
                 playerName: player.name,
                 value: winStreak
+            });
+            this.stats.clutchSets.push({
+                playerName: player.name,
+                value: clutchSets.length
             });
         }
     }

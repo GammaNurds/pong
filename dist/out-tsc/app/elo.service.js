@@ -12,7 +12,7 @@ var EloService = (function () {
     function EloService() {
     }
     EloService.prototype.calc = function (winner, loser) {
-        var K = 10;
+        var K = 20;
         var winner_calc = winner;
         var loser_calc = loser;
         if (Math.abs(loser - winner) > 400) {
@@ -43,11 +43,9 @@ var EloService = (function () {
                 var newELO_1 = this_1.calc(p1ELO["elo"], p2ELO["elo"]);
                 ranks.forEach(function (rank) {
                     if (rank.playerName === record.p1Name) {
-                        console.log(rank.elo);
                         rank.elo = newELO_1[0];
                     }
                     else if (rank.playerName === record.p2Name) {
-                        console.log(rank.elo);
                         rank.elo = newELO_1[1];
                     }
                 });
