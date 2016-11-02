@@ -12,16 +12,10 @@ export class EloService {
       const K = 20;
       let winner_calc = winner;
       let loser_calc = loser;
-      if (Math.abs(loser - winner) > 400) {
-          winner_calc = 400;
-          loser_calc = -400;
-      }
 
       let EWP_winner = 1 / (1 + (Math.pow(10, ((loser_calc - winner_calc) / 400))));
       let EWP_loser = 1 - EWP_winner;
 
-      winner = Math.ceil(winner + K * (1 - EWP_winner));
-      loser = Math.ceil(loser + K * (0 - EWP_loser));
       return [winner, loser];
   };
 
