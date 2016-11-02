@@ -16,6 +16,8 @@ export class EloService {
       let EWP_winner = 1 / (1 + (Math.pow(10, ((loser_calc - winner_calc) / 400))));
       let EWP_loser = 1 - EWP_winner;
 
+      winner = Math.round((winner + K * (1 - EWP_winner)) * 100) / 100;
+      loser = Math.round((loser + K * (0 - EWP_loser)) * 100) / 100;
       return [winner, loser];
   };
 
