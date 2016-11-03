@@ -54,7 +54,8 @@ export class RecordsComponent implements OnInit {
             comebacks: [],
             comebacksAgainst: [],
             winStreak: [],
-            clutchSets: []
+            clutchSets: [],
+            clutchSetsAgainst: []
         };
 
         this.stats.ranks = this.eloService.calcELO(records, players);
@@ -125,6 +126,20 @@ export class RecordsComponent implements OnInit {
                 }
             });
 
+            let clutchSetsAgainst = _.filter(records, o => {
+                if (o.p1Sets >= 2 && o.p2Sets >= 2) {  // is clutch set
+                    if (o.p1Sets < o.p2Sets && o.p1Name === player.name) {
+                        return true;
+                    } else if (o.p1Sets > o.p2Sets && o.p2Name === player.name) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            });
+
             this.stats.wins.push({
                 playerName: player.name,
                 value: wins.length
@@ -156,6 +171,10 @@ export class RecordsComponent implements OnInit {
             this.stats.clutchSets.push({
                 playerName: player.name,
                 value: clutchSets.length
+            });
+            this.stats.clutchSetsAgainst.push({
+                playerName: player.name,
+                value: clutchSetsAgainst.length
             });
         }
     }

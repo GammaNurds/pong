@@ -15,14 +15,10 @@ var EloService = (function () {
         var K = 20;
         var winner_calc = winner;
         var loser_calc = loser;
-        if (Math.abs(loser - winner) > 400) {
-            winner_calc = 400;
-            loser_calc = -400;
-        }
         var EWP_winner = 1 / (1 + (Math.pow(10, ((loser_calc - winner_calc) / 400))));
         var EWP_loser = 1 - EWP_winner;
-        winner = Math.ceil(winner + K * (1 - EWP_winner));
-        loser = Math.ceil(loser + K * (0 - EWP_loser));
+        winner = Math.round((winner + K * (1 - EWP_winner)));
+        loser = Math.round((loser + K * (0 - EWP_loser)));
         return [winner, loser];
     };
     ;
