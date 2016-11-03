@@ -7,7 +7,7 @@ import { Player } from '../shared/player.model';
 @Injectable()
 export class PlayerService {
 
-    HOST = "http://localhost:3002";
+    HOST = "";  //http://localhost:3002
 
     constructor(private http: Http) { }
 
