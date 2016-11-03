@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "angular-cli": "1.0.0-beta.17",
     "@angular/common": "~2.0.0",
     "@angular/compiler": "~2.0.0",
     "@angular/core": "~2.0.0",
@@ -40,7 +41,6 @@
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.17",
     "codelyzer": "~0.0.26",
     "eslint": "^3.8.1",
     "jasmine-core": "2.4.1",
