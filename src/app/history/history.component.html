@@ -10,6 +10,8 @@
         <td>{{ record.p2Name }}</td>
         <td>{{ record.p1Sets }}</td>
         <td>{{ record.p2Sets }}</td>
+        <td *ngIf="isComeback(record)">comeback</td>
+        <td *ngIf="isSweep(record)">sweep</td>
       </tr>
     </tbody>
   </table>

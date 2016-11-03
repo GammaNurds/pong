@@ -17,6 +17,19 @@ var HistoryComponent = (function () {
         var _this = this;
         this.recordService.getRecords().then(function (records) { return _this.records = records; });
     };
+    HistoryComponent.prototype.hasClutchSet = function (record) {
+        return record.p1Sets >= 2 && record.p2Sets >= 2;
+    };
+    HistoryComponent.prototype.getWinner = function (record) {
+        return record.p1Sets > record.p2Sets ? record.p1Name : record.p2Name;
+    };
+    HistoryComponent.prototype.isSweep = function (record) {
+        return record.p1Sets === 0 || record.p2Sets === 0;
+    };
+    HistoryComponent.prototype.isComeback = function (record) {
+        var winnerName = this.getWinner(record);
+        return record.setWinners[1] !== winnerName && record.setWinners[2] !== winnerName;
+    };
     return HistoryComponent;
 }());
 HistoryComponent = __decorate([
