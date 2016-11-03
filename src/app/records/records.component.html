@@ -89,24 +89,13 @@
     </tbody>
   </table>
 
-  <h2>Clutch sets</h2>
+  <h2>Iceman - clutch sets won</h2>
   <table class="table">
     <tbody>
-      <tr *ngFor="let stat of stats.clutchSets | orderBy: ['value']; let i = index">
+      <tr *ngFor="let stat of stats.clutchSets | orderBy: ['perc']; let i = index">
         <td scope="row">{{ i + 1 }}</td>
         <td>{{ stat.playerName }}</td>
-        <td>{{ stat.value }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>Clutch sets against</h2>
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let stat of stats.clutchSetsAgainst | orderBy: ['value']; let i = index">
-        <td scope="row">{{ i + 1 }}</td>
-        <td>{{ stat.playerName }}</td>
-        <td>{{ stat.value }}</td>
+        <td>{{ stat.perc + "% for " + stat.sets + " played"}}</td>
       </tr>
     </tbody>
   </table>

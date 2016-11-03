@@ -45,6 +45,29 @@ export class RecordsComponent implements OnInit {
 
     calcStats(records: Record[], players: Player[]): void {
 
+        // TODO: amke these Record methods
+        function hasClutchSet(record: Record) {
+            return record.p1Sets >= 2 && record.p2Sets >= 2;
+        }
+
+        function hasPlayed(record: Record, playerName) {
+            return record.p1Name === playerName || record.p2Name === playerName;
+        }
+
+        function getWinner(record: Record) {
+            return record.p1Sets > record.p2Sets ? record.p1Name : record.p2Name;
+        }
+
+        function isSweep(record: Record) {
+            return record.p1Sets === 0 || record.p2Sets === 0;
+        }
+
+        function isComeback(record: Record) {
+            let winnerName = getWinner(record);
+            // won, but lost first two sets
+            return record.setWinners[1] !== winnerName && record.setWinners[2] !== winnerName;
+        }
+
         this.stats = {
             ranks: [],
             wins: [],
@@ -54,8 +77,7 @@ export class RecordsComponent implements OnInit {
             comebacks: [],
             comebacksAgainst: [],
             winStreak: [],
-            clutchSets: [],
-            clutchSetsAgainst: []
+            clutchSets: []
         };
 
         this.stats.ranks = this.eloService.calcELO(records, players);
@@ -67,44 +89,26 @@ export class RecordsComponent implements OnInit {
             });
 
             let sweeps = _.filter(records, o => {
-                return (o.p1Name === player.name && o.p1Sets > o.p2Sets && o.p2Sets === 0) || (o.p2Name === player.name && o.p1Sets < o.p2Sets && o.p1Sets === 0);
+                return isSweep(o) && getWinner(o) === player.name;
             });
 
             let sweepsAgainst = _.filter(records, o => {
-                return (o.p1Name === player.name && o.p1Sets < o.p2Sets && o.p1Sets === 0) || (o.p2Name === player.name && o.p1Sets > o.p2Sets && o.p2Sets === 0);
+                return hasPlayed(o, player.name) && isSweep(o) && getWinner(o) !== player.name;
             });
 
             let comebacks = _.filter(records, o => {
-                let isComeback = false;
-
-                // won match
-                if (this.isWinner(player.name, o)) {
-                    // lost first two sets
-                    if (o.setWinners[1] !== player.name && o.setWinners[2] !== player.name) {
-                        isComeback = true;
-                    }
-                }
-                return isComeback;
+                return isComeback(o) && getWinner(o) === player.name;
             });
 
             let comebacksAgainst = _.filter(records, o => {
-                let isComebackAgainst = false;
-
-                // lost match
-                if (!this.isWinner(player.name, o)) {
-                    // won first two sets
-                    if (o.setWinners[1] === player.name && o.setWinners[2] === player.name) {
-                        isComebackAgainst = true;
-                    }
-                }
-                return isComebackAgainst;
+                return hasPlayed(o, player.name) && isComeback(o) && getWinner(o) !== player.name;
             });
 
             // win streak
             let winStreak = 0;
-            let playedGames = _.filter(records, o => o.p1Name === player.name || o.p2Name === player.name);
+            let playedGames = _.filter(records, o => hasPlayed(o, player.name));
             for (let record of _.reverse(playedGames)) {
-                if (this.isWinner(player.name, record)) {
+                if (getWinner(record) === player.name) {
                     winStreak++;
                 } else {  // lost game
                     break;
@@ -113,31 +117,11 @@ export class RecordsComponent implements OnInit {
 
             // clutch sets are a won set on a stand of 2-2
             let clutchSets = _.filter(records, o => {
-                if (o.p1Sets >= 2 && o.p2Sets >= 2) {  // has clutch set
-                    if (o.p1Sets > o.p2Sets && o.p1Name === player.name) {
-                        return true;
-                    } else if (o.p1Sets < o.p2Sets && o.p2Name === player.name) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
+                return hasPlayed(o, player.name) && hasClutchSet(o);
             });
 
-            let clutchSetsAgainst = _.filter(records, o => {
-                if (o.p1Sets >= 2 && o.p2Sets >= 2) {  // is clutch set
-                    if (o.p1Sets < o.p2Sets && o.p1Name === player.name) {
-                        return true;
-                    } else if (o.p1Sets > o.p2Sets && o.p2Name === player.name) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
+            let clutchSetsWon = _.filter(records, o => {
+                return hasClutchSet(o) && getWinner(o) === player.name;
             });
 
             this.stats.wins.push({
@@ -170,12 +154,11 @@ export class RecordsComponent implements OnInit {
             });
             this.stats.clutchSets.push({
                 playerName: player.name,
-                value: clutchSets.length
+                sets: clutchSets.length,
+                won: clutchSetsWon.length,
+                perc: Math.round(clutchSetsWon.length / clutchSets.length * 100)
             });
-            this.stats.clutchSetsAgainst.push({
-                playerName: player.name,
-                value: clutchSetsAgainst.length
-            });
+
         }
     }
 }

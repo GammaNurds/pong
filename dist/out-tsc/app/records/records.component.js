@@ -36,6 +36,22 @@ var RecordsComponent = (function () {
     };
     RecordsComponent.prototype.calcStats = function (records, players) {
         var _this = this;
+        function hasClutchSet(record) {
+            return record.p1Sets >= 2 && record.p2Sets >= 2;
+        }
+        function hasPlayed(record, playerName) {
+            return record.p1Name === playerName || record.p2Name === playerName;
+        }
+        function getWinner(record) {
+            return record.p1Sets > record.p2Sets ? record.p1Name : record.p2Name;
+        }
+        function isSweep(record) {
+            return record.p1Sets === 0 || record.p2Sets === 0;
+        }
+        function isComeback(record) {
+            var winnerName = getWinner(record);
+            return record.setWinners[1] !== winnerName && record.setWinners[2] !== winnerName;
+        }
         this.stats = {
             ranks: [],
             wins: [],
@@ -45,8 +61,7 @@ var RecordsComponent = (function () {
             comebacks: [],
             comebacksAgainst: [],
             winStreak: [],
-            clutchSets: [],
-            clutchSetsAgainst: []
+            clutchSets: []
         };
         this.stats.ranks = this.eloService.calcELO(records, players);
         var _loop_1 = function (player) {
@@ -54,34 +69,22 @@ var RecordsComponent = (function () {
                 return _this.isWinner(player.name, o);
             });
             var sweeps = _.filter(records, function (o) {
-                return (o.p1Name === player.name && o.p1Sets > o.p2Sets && o.p2Sets === 0) || (o.p2Name === player.name && o.p1Sets < o.p2Sets && o.p1Sets === 0);
+                return isSweep(o) && getWinner(o) === player.name;
             });
             var sweepsAgainst = _.filter(records, function (o) {
-                return (o.p1Name === player.name && o.p1Sets < o.p2Sets && o.p1Sets === 0) || (o.p2Name === player.name && o.p1Sets > o.p2Sets && o.p2Sets === 0);
+                return hasPlayed(o, player.name) && isSweep(o) && getWinner(o) !== player.name;
             });
             var comebacks = _.filter(records, function (o) {
-                var isComeback = false;
-                if (_this.isWinner(player.name, o)) {
-                    if (o.setWinners[1] !== player.name && o.setWinners[2] !== player.name) {
-                        isComeback = true;
-                    }
-                }
-                return isComeback;
+                return isComeback(o) && getWinner(o) === player.name;
             });
             var comebacksAgainst = _.filter(records, function (o) {
-                var isComebackAgainst = false;
-                if (!_this.isWinner(player.name, o)) {
-                    if (o.setWinners[1] === player.name && o.setWinners[2] === player.name) {
-                        isComebackAgainst = true;
-                    }
-                }
-                return isComebackAgainst;
+                return hasPlayed(o, player.name) && isComeback(o) && getWinner(o) !== player.name;
             });
             var winStreak = 0;
-            var playedGames = _.filter(records, function (o) { return o.p1Name === player.name || o.p2Name === player.name; });
+            var playedGames = _.filter(records, function (o) { return hasPlayed(o, player.name); });
             for (var _i = 0, _a = _.reverse(playedGames); _i < _a.length; _i++) {
                 var record = _a[_i];
-                if (this_1.isWinner(player.name, record)) {
+                if (getWinner(record) === player.name) {
                     winStreak++;
                 }
                 else {
@@ -90,36 +93,10 @@ var RecordsComponent = (function () {
             }
             ;
             var clutchSets = _.filter(records, function (o) {
-                if (o.p1Sets >= 2 && o.p2Sets >= 2) {
-                    if (o.p1Sets > o.p2Sets && o.p1Name === player.name) {
-                        return true;
-                    }
-                    else if (o.p1Sets < o.p2Sets && o.p2Name === player.name) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-                else {
-                    return false;
-                }
+                return hasPlayed(o, player.name) && hasClutchSet(o);
             });
-            var clutchSetsAgainst = _.filter(records, function (o) {
-                if (o.p1Sets >= 2 && o.p2Sets >= 2) {
-                    if (o.p1Sets < o.p2Sets && o.p1Name === player.name) {
-                        return true;
-                    }
-                    else if (o.p1Sets > o.p2Sets && o.p2Name === player.name) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-                else {
-                    return false;
-                }
+            var clutchSetsWon = _.filter(records, function (o) {
+                return hasClutchSet(o) && getWinner(o) === player.name;
             });
             this_1.stats.wins.push({
                 playerName: player.name,
@@ -151,11 +128,9 @@ var RecordsComponent = (function () {
             });
             this_1.stats.clutchSets.push({
                 playerName: player.name,
-                value: clutchSets.length
-            });
-            this_1.stats.clutchSetsAgainst.push({
-                playerName: player.name,
-                value: clutchSetsAgainst.length
+                sets: clutchSets.length,
+                won: clutchSetsWon.length,
+                perc: Math.round(clutchSetsWon.length / clutchSets.length * 100)
             });
         };
         var this_1 = this;
