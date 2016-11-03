@@ -10,7 +10,7 @@ import { Record } from './record.model';
 @Injectable()
 export class RecordService {
 
-    HOST = ""; // http://localhost:3002
+    HOST = "http://localhost:3002";  // https://localhost:3002
 
     constructor(private http: Http) { }
 

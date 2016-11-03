@@ -13,7 +13,7 @@ import 'rxjs/add/operator/toPromise';
 var RecordService = (function () {
     function RecordService(http) {
         this.http = http;
-        this.HOST = "";
+        this.HOST = "http://localhost:3002";
     }
     RecordService.prototype.getRecords = function () {
         return this.http.get(this.HOST + "/api/records")

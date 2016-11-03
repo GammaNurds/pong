@@ -13,7 +13,7 @@ import 'rxjs/add/operator/toPromise';
 var PlayerService = (function () {
     function PlayerService(http) {
         this.http = http;
-        this.HOST = "";
+        this.HOST = "http://localhost:3002";
     }
     PlayerService.prototype.getPlayers = function () {
         return this.http.get(this.HOST + "/api/players")

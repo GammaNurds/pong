@@ -1,0 +1,17 @@
+<div class="tables">
+
+  <h2>History</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let record of records | orderBy: 'updatedAt'; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ record.updatedAt | date: "dd.MM.yyyy hh:mm" }}</td>
+        <td>{{ record.p1Name }}</td>
+        <td>{{ record.p2Name }}</td>
+        <td>{{ record.p1Sets }}</td>
+        <td>{{ record.p2Sets }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

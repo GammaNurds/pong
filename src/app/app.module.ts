@@ -10,6 +10,8 @@ import { GameComponent } from './game/game.component';
 import { NotNamePipe } from './game/not-name.pipe';
 import { RecordsComponent } from './records/records.component';
 import { OrderByPipe } from './shared/order-by.pipe';
+import { FilterPipe } from './filter.pipe';
+import { HistoryComponent } from './history/history.component';
 //import 'rxjs/add/operator/toPromise';
 
 // import { RecordService } from "./record.service";  // application wide services
@@ -20,7 +22,9 @@ import { OrderByPipe } from './shared/order-by.pipe';
     GameComponent,
     NotNamePipe,
     RecordsComponent,
-    OrderByPipe
+    OrderByPipe,
+    FilterPipe,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { OrderByPipe } from './shared/order-by.pipe';
     RouterModule.forRoot([
       { path: '', redirectTo: 'play', pathMatch: 'full' },
       { path: 'play', component: GameComponent },
-      { path: 'records', component: RecordsComponent }
+      { path: 'records', component: RecordsComponent },
+      { path: 'history', component: HistoryComponent }
     ]),
     HttpModule
   ],

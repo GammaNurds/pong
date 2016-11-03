@@ -81,7 +81,18 @@
   <h2>Hottest -win streak</h2>
   <table class="table">
     <tbody>
-      <tr *ngFor="let stat of stats.winStreak | orderBy: ['value']; let i = index">
+      <tr *ngFor="let stat of stats.winStreak | filter: { value: 0 } : true | orderBy: ['value']; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ stat.playerName }}</td>
+        <td>{{ stat.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Most harmless -loss streak</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let stat of stats.lossStreak | filter: { value: 0 } : true | orderBy: ['value']; let i = index">
         <td scope="row">{{ i + 1 }}</td>
         <td>{{ stat.playerName }}</td>
         <td>{{ stat.value }}</td>

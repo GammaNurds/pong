@@ -7,6 +7,7 @@ import { PlayerService } from '../game/player.service';
 import { EloService } from '../elo.service';
 import * as _ from 'lodash';
 import { OrderByPipe } from '../shared/order-by.pipe';
+import { FilterPipe } from '../filter.pipe';
 
 @Component({
   selector: 'app-records',
@@ -77,6 +78,7 @@ export class RecordsComponent implements OnInit {
             comebacks: [],
             comebacksAgainst: [],
             winStreak: [],
+            lossStreak: [],
             clutchSets: []
         };
 
@@ -110,6 +112,17 @@ export class RecordsComponent implements OnInit {
             for (let record of _.reverse(playedGames)) {
                 if (getWinner(record) === player.name) {
                     winStreak++;
+                } else {  // lost game
+                    break;
+                }
+            };
+
+            // losing streak
+            let lossStreak = 0;
+            playedGames = _.filter(records, o => hasPlayed(o, player.name));
+            for (let record of _.reverse(playedGames)) {
+                if (hasPlayed(record, player.name) && getWinner(record) !== player.name) {
+                    lossStreak++;
                 } else {  // lost game
                     break;
                 }
@@ -151,6 +164,10 @@ export class RecordsComponent implements OnInit {
             this.stats.winStreak.push({
                 playerName: player.name,
                 value: winStreak
+            });
+            this.stats.lossStreak.push({
+                playerName: player.name,
+                value: lossStreak
             });
             this.stats.clutchSets.push({
                 playerName: player.name,

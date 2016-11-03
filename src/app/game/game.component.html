@@ -19,6 +19,13 @@
     </div>
 </div>
 
+<!-- select set winner -->
+<div *ngIf="game && !game.isOver()">
+    <h3>Satz {{ set }} hat gewonnen:</h3>
+    <div class="player fullsizebutton" (click)="addSet(player1)">{{ player1.name }}</div>
+    <div class="player fullsizebutton" (click)="addSet(player2)">{{ player2.name }}</div>
+</div>
+
 <div *ngIf="game && game.isOver()">
     <div>{{ winText }}</div>
     <button class="fullsizebutton" (click)="startGame()">rematch</button>
