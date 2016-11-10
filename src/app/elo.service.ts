@@ -9,7 +9,7 @@ export class EloService {
     constructor() { }
 
     calc(winner, loser): any[] {
-        const K = 20;
+        const K = 32;
         let winner_calc = winner;
         let loser_calc = loser;
 

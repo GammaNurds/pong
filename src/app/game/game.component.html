@@ -19,6 +19,16 @@
     </div>
 </div>
 
+<!-- score -->
+<div *ngIf="game">
+
+    <span>{{ player1.name }}</span>
+    <span>{{ getPlayerSets(player1) }}</span>
+
+    <span>{{ player2.name }}</span>
+    <span>{{ getPlayerSets(player2) }}</span>
+</div>
+
 <!-- select set winner -->
 <div *ngIf="game && !game.isOver()">
     <h3>Satz {{ set }} hat gewonnen:</h3>
